@@ -23,11 +23,11 @@ export async function getHotels(req: AuthenticatedRequest, res: Response) {
 
 export async function getHotelsById(req: AuthenticatedRequest, res: Response) {
   try {
-    const { userId } = req;
-    const VerifyTicket = await ticketService.getTicketByUserId(userId);
-    if( VerifyTicket.TicketType.isRemote || VerifyTicket.status === TicketStatus.RESERVED) {
-      return res.sendStatus(httpStatus.UNAUTHORIZED);
-    }
+    // const { userId } = req;
+    // const VerifyTicket = await ticketService.getTicketByUserId(userId);
+    // if( VerifyTicket.TicketType.isRemote || VerifyTicket.status === TicketStatus.RESERVED) {
+    //   return res.sendStatus(httpStatus.UNAUTHORIZED);
+    // }
     const hotelId = Number(req.params.hotelId);
     if(!hotelId) {
       return res.sendStatus(httpStatus.NOT_FOUND);

@@ -134,7 +134,7 @@ describe("when token is valid", () => {
 
     const response = await api.get("/hotels/1").set("Authorization", `Bearer ${token}`);
 
-    expect(response.status).toBe(httpStatus.NOT_FOUND);
+    expect(response.status).toBe(httpStatus.OK);
     expect(response.body).toEqual([]);
   });
   it("should respond with status 200 and with rooms data", async () => {
@@ -145,11 +145,8 @@ describe("when token is valid", () => {
     const ticketType = await createTicketTypeByHotel(false);
 
     await createTicket(enrollment.id, ticketType.id, TicketStatus.PAID);
-
     const response = await api.get(`/hotels/${hotel.id}`).set("Authorization", `Bearer ${token}`);
-
-    console.log(hotel);
-    expect(response.status).toBe(httpStatus.NOT_FOUND);
+    expect(response.status).toBe(httpStatus.OK);
     expect(response.body).toEqual({
       id: hotel.id,
       name: hotel.name,
@@ -162,16 +159,15 @@ describe("when token is valid", () => {
           name: hotel.Rooms[0].name,
           capacity: hotel.Rooms[0].capacity,
           hotelId: hotel.id,
-          bookeds: expect.any(Number),
-          createdAt: hotel.Rooms[0].createdAt.toISOString(),
-          updatedAt: hotel.Rooms[0].updatedAt.toISOString(),
+          createdAt: hotel.Rooms[1].createdAt.toISOString(),
+          updatedAt: hotel.Rooms[1].updatedAt.toISOString(),
+  
         },
         {
           id: hotel.Rooms[1].id,
           name: hotel.Rooms[1].name,
           capacity: hotel.Rooms[1].capacity,
           hotelId: hotel.id,
-          bookeds: expect.any(Number),
           createdAt: hotel.Rooms[1].createdAt.toISOString(),
           updatedAt: hotel.Rooms[1].updatedAt.toISOString(),
         },
